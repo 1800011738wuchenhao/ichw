@@ -8,6 +8,10 @@ d=turtle.Turtle()
 e=turtle.Turtle()
 f=turtle.Turtle()
 
+sun=turtle.Turtle()
+sun.shape("circle")
+sun.color('orange')
+
 def planet(name,color):
     name.pencolor(color)
     name.color(color)
@@ -18,7 +22,7 @@ planet(b,'green')
 planet(c,'red')
 planet(d,'black')
 planet(e,'yellow')
-planet(f,'orange')
+planet(f,'brown')
 
 def origin(t,x):
     t.up()

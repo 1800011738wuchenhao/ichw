@@ -12,6 +12,7 @@ f=turtle.Turtle()
 sun=turtle.Turtle()
 sun.shape("circle")
 sun.color('orange')
+sun.turtlesize(2)
 
 def planet(name,color):
     name.pencolor(color)
@@ -29,12 +30,12 @@ def origin(t,x):
     t.up()
     t.goto(x,0)
     t.down()
-origin(a,30)
-origin(b,48)
-origin(c,66)
-origin(d,84)
-origin(e,102)
-origin(f,120)
+origin(a,35)
+origin(b,56)
+origin(c,77)
+origin(d,98)
+origin(e,119)
+origin(f,140)
     
 def orbit(t,a,e,o):    
     r=a*(1-e**2)/(1+e*math.cos(math.radians(o)))
@@ -43,9 +44,9 @@ def orbit(t,a,e,o):
     t.goto(x,y)
 
 for o in range(1440):
-    orbit(a,50,0.4,8*o)
-    orbit(b,80,0.4,8*o/2.023857703)
-    orbit(c,110,0.4,8*o/3.263127334)
-    orbit(d,140,0.4,8*o/4.685296149)
-    orbit(e,170,0.4,8*o/6.269290231)
-    orbit(f,200,0.4,o)
+    orbit(a,50,0.3,8*o)
+    orbit(b,80,0.3,8*o/2.023857703)
+    orbit(c,110,0.3,8*o/3.263127334)
+    orbit(d,140,0.3,8*o/4.685296149)
+    orbit(e,170,0.3,8*o/6.269290231)
+    orbit(f,200,0.3,o)

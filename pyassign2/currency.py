@@ -1,6 +1,6 @@
 #currency exchange
 #Wuchenhao
-#2018/11/22
+#2018/11/23
 """Module for currency exchange
 
 This module provides several string parsing functions to implement a 
@@ -32,8 +32,8 @@ def before_space(str_with_space):
     
     Parameter str_with_space:the FROM or TO value from the result from
     webpage
-    Precondition: str_with_space is a string for a num and a valid
-    currency code with a space between them'''
+    Precondition: str_with_space is a string for a num and a currency 
+    name with a space between them'''
         
     value=str_with_space.split()[0]
     return value
@@ -46,7 +46,13 @@ def test_get_to():
     docstr = doc.read()
     doc.close()
     jstr = docstr.decode('ascii')
+    
+    doc_wrong_input = urlopen('http://cs1110.cs.cornell.edu/2016fa/a1server.php?from=XXX&to=XXX&amt=X')
+    docstr_wrong_input = doc_wrong_input.read()
+    doc_wrong_input.close()
+    jstr_wrong_input = docstr_wrong_input.decode('ascii')
     assert('2.1589225 Euros' == get_to(jstr))
+    assert('' == get_to(jstr_wrong_input))
 
 def test_before_space():
     """test the function before_space()"""
@@ -56,6 +62,9 @@ def test_before_space():
 def test_exchange():
     """test the function exchange()"""
     assert(3.673162 == exchange('USD','AED',1))
+    assert('The code of the currency on hand is invalid' == exchange('XXX','AED',1))
+    assert('The code of the currency to convert to is invalid.' == exchange('USD','XXX',1))
+    assert('The currency amount you input is invalid.' == exchange('USD','AED','X'))
 
 def testAll():
     """test all cases"""
@@ -90,5 +99,14 @@ def exchange(currency_from, currency_to, amount_from):
     doc.close()
     jstr = docstr.decode('ascii')
     
-    amount_to = float(before_space(get_to(jstr)))
-    return amount_to
+    if get_to(jstr) == '':
+        error_name=jstr.split(':')[-1].split()[0].replace('"','')
+        if error_name=='Source':
+            return 'The code of the currency on hand is invalid'
+        elif error_name == 'Exchange':
+            return 'The code of the currency to convert to is invalid.'
+        elif error_name == 'Currency':
+            return 'The currency amount you input is invalid.'
+    else:
+        amount_to = float(before_space(get_to(jstr)))
+        return amount_to

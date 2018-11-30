@@ -1,6 +1,6 @@
 #currency exchange
 #Wuchenhao
-#2018/11/23
+#2018/11/30
 """Module for currency exchange
 
 This module provides several string parsing functions to implement a 
@@ -110,3 +110,5 @@ def exchange(currency_from, currency_to, amount_from):
     else:
         amount_to = float(before_space(get_to(jstr)))
         return amount_to
+if __name__ == '__main__':
+    testAll()

@@ -29,7 +29,7 @@ if __name__=='__main__':
         allcoors=[]
         for j in range(b):
             for k in range(a):
-                alls.append((x+k,y+j))
+                allcoors.append((x+k,y+j))
         return(allcoors)
 
     def tonum(t):

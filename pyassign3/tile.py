@@ -1,6 +1,6 @@
 #ways to tile
 #Wuchenhao
-#2018/12/14
+#2018/12/17
 """Module for tile work
 
 This module provides all the ways to pave a wall of given length and
@@ -98,11 +98,11 @@ if __name__=='__main__':
         same ones.
 
         The value returned has type list.'''
-        k=list(set([tuple(p) for p in tile()]))
-        j=[0]*len(k)
-        for t in k:
-            j[k.index(t)]=list(t)
-        return(j)
+        ways_without_repeats=list(set([tuple(p) for p in tile()]))
+        tupled_ways=[0]*len(ways_without_repeats)
+        for t in ways_without_repeats:
+            tupled_ways[ways_without_repeats.index(t)]=list(t)
+        return(tupled_ways)
 
     for i in output():
         print(i)

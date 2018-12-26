@@ -51,25 +51,29 @@ if __name__ == '__main__':
 
     else:
         url = sys.argv[1]    #获得输入的网址
+        if len(sys.argv) >= 3 and type(eval(sys.argv[2])) == int:
+            topn = int(sys.argv[2])   #获得topn
+            if topn <= 0:
+                print('输入的topn必须是正整数，不能是{}'.format(sys.argv[2]))
+                topn = 0    #给topn<=0时
+        elif len(sys.argv) == 2:
+            topn = 10    #未给定topn时
+        elif type(eval(sys.argv[2])) != int:
+            print('输入的topn必须是正整数，不能是{}'.format(sys.argv[2]))    #给定非法topn时
+            
         try:
-            topn = sys.argv[2]    #尝试获得topn
-        except IndexError:
-            pass
-        try:
-            txt = urlopen('http://www.gutenberg.org/cache/epub/19033/pg19033.txt')    #打开网页获得txt文件
+            txt = urlopen(url)    #打开网页获得txt文件
             txt_bytes = txt.read()    #得到字节流形式文本
             txt.close()    #关掉网页
             txt_str = txt_bytes.decode('UTF-8','strict')    #字节流解码为字符串形式
             txt_lower = txt_str.lower()    #都换为小写以方便统计
             wcount(txt_lower,topn)    #统计次数输出前topn
-        
+
         except urllib.error.HTTPError:    
             print(sys.exc_info()[1])    
-        
+
         except urllib.error.URLError:    
             print(sys.exc_info()[1])
-        
+            
         except ValueError:
-            print('输入的网址格式不正确')    
-        except TypeError:
-            print('输入的topn必须是正整数，不能是{}'.format(sys.argv[2]))    #处理了一部分错误
+            print('输入的网址格式不正确')    #处理了一部分错误

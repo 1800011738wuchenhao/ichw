@@ -36,10 +36,12 @@ def wcount(lines, topn = 10):
     count_list.sort()
     count_list.reverse()    #按次数倒序放入列表
     
+    print("word", '\t', "times")     #表头
+    print("------", '\t', "------")
     n = 1
     while n <= topn:
-        print(str(count_list[n-1][1]) + ':' + str(count_list[n-1][0]))
-        n += 1    #输出前topn的单词
+        print(str(count_list[n-1][1]) ,'\t', str(count_list[n-1][0]))
+        n += 1    #对齐输出前topn的单词
 
 
 if __name__ == '__main__':
